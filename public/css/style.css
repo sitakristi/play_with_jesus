@@ -1,0 +1,81 @@
+/* Styling Utama PlayWithJesus - Tema Pastel Kalem & Ramah Anak */
+body {
+    /* Latar belakang gradasi biru pastel dan hijau pastel yang lembut */
+    background: linear-gradient(135deg, #e0f2fe 0%, #d1fae5 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #4b5563;
+}
+.card {
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+/* Header Form Tambah - Biru Pastel */
+.card-header-add {
+    background: linear-gradient(135deg, #93c5fd, #60a5fa) !important;
+    color: #1e3a8a !important;
+    border-radius: 20px 20px 0 0 !important;
+    padding: 20px;
+}
+
+/* Header Tabel Data - Hijau Pastel */
+.card-header-view {
+    background: linear-gradient(135deg, #86efac, #4ade80) !important;
+    color: #064e3b !important;
+    border-radius: 20px 20px 0 0 !important;
+    padding: 20px;
+}
+
+/* Header Form Edit - Kuning Pastel */
+.card-header-edit {
+    background: linear-gradient(135deg, #fde047, #facc15) !important;
+    color: #713f12 !important;
+    border-radius: 20px 20px 0 0 !important;
+    padding: 20px;
+}
+
+.form-control, .form-select {
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    background-color: #f9fafb;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
+}
+
+.table th {
+    background-color: #374151;
+    color: white;
+    text-align: center;
+    padding: 12px;
+}
+
+.table td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 12px;
+}
+
+.table td:nth-child(2), .table td:nth-child(6) {
+    text-align: left;
+}
+
+/* Tombol dengan sentuhan pastel */
+.btn-success {
+    background-color: #34d399;
+    border-color: #34d399;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: 600;
+    color: #064e3b;
+}
+.btn-success:hover {
+    background-color: #10b981;
+    border-color: #10b981;
+    color: white;
+}
