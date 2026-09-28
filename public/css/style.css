@@ -79,3 +79,103 @@ body {
     border-color: #10b981;
     color: white;
 }
+
+/* STYLING HALAMAN LOGIN & REGISTER */
+
+/* Container utama halaman auth */
+.auth-body, .login-page, .register-page {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); 
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif; 
+    margin: 0;
+}
+
+/* Kotak Form Login & Register */
+.auth-container, .auth-card {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+/* Judul Form */
+.auth-container h2, .auth-card h2 {
+    margin-bottom: 24px;
+    font-size: 24px;
+    color: #333333;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Grup Input Form */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555555;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+/* Efek Fokus pada Input */
+.form-group input:focus {
+    border-color: #4a90e2; 
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+    outline: none;
+}
+
+/* Tombol Submit (Login / Register) */
+.btn-auth {
+    width: 100%;
+    padding: 12px;
+    background-color: #4a90e2; 
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-auth:hover {
+    background-color: #357abd; 
+}
+
+/* Teks tautan bawah */
+.auth-footer-text {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666666;
+}
+
+.auth-footer-text a {
+    color: #4a90e2;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-footer-text a:hover {
+    text-decoration: underline;
+}
