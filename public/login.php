@@ -1,4 +1,5 @@
 <?php
+session_start();
 require __DIR__.'/../vendor/autoload.php';
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\Auth;
@@ -14,7 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         $signInResult = $auth->signInWithEmailAndPassword($email, $password);
-        $pesan = "<div class='alert alert-success mt-3'>Login successful! User ID: " . $signInResult->firebaseUserId() . "</div>";
+        
+        // Simpan data user ke dalam session
+        $_SESSION['user_id'] = $signInResult->firebaseUserId();
+        
+        // Arahkan langsung ke halaman CRUD
+        header("Location: index.php"); 
+        exit();
     } catch (\Throwable $e) {
         $pesan = "<div class='alert alert-danger mt-3'>Login failed: " . $e->getMessage() . "</div>";
     }

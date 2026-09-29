@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -8,6 +16,12 @@
 </head>
 <body>
     <div class="container py-5">
+        
+        <!-- Tombol Logout diletakkan di sudut kanan atas -->
+        <div class="d-flex justify-content-end">
+            <a href="logout.php" class="btn btn-danger mb-3">Logout</a>
+        </div>
+
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card shadow-lg">
@@ -29,7 +43,7 @@
                                     <option value="Puzzle">Puzzle</option>
                                     <option value="Flash Card">Flash Card</option>
                                     <option value="Tebak Gambar">Tebak Gambar</option>
-                                    <option value="Tebak Gambar">Aksesori</option>
+                                    <option value="Aksesori">Aksesori</option>
                                 </select>
                             </div>
 
