@@ -2,6 +2,7 @@ FROM php:8.2-apache
 
 # Salin seluruh file proyek ke dalam direktori server Docker
 COPY . /var/www/html/
+RUN chmod -R 755 /var/www/html
 
 # Arahkan Document Root ke folder public
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
