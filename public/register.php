@@ -27,11 +27,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    try {
-        $user = $auth->createUserWithEmailAndPassword($email, $password);
-        $pesan = "<div class='alert alert-success mt-3'>Registrasi berhasil! UID: " . $user->uid . "</div>";
-    } catch (\Throwable $e) {
-        $pesan = "<div class='alert alert-danger mt-3'>Registrasi gagal: " . $e->getMessage() . "</div>";
+    // Validasi ketat password: minimal 8 karakter, ada huruf besar, huruf kecil, dan angka
+    $isLengthValid = strlen($password) >= 8;
+    $hasUppercase = preg_match('/[A-Z]/', $password);
+    $hasLowercase = preg_match('/[a-z]/', $password);
+    $hasNumber    = preg_match('/[0-9]/', $password);
+
+    if (!$isLengthValid || !$hasUppercase || !$hasLowercase || !$hasNumber) {
+        $pesan = "<div class='alert alert-danger mt-3'>Registrasi gagal: Password harus minimal 8 karakter serta mengandung kombinasi huruf besar, huruf kecil, dan angka.</div>";
+    } else {
+        try {
+            // Buat user baru di Firebase Auth
+            $user = $auth->createUserWithEmailAndPassword($email, $password);
+            
+            // Jika berhasil, langsung arahkan ke halaman login.php tanpa menampilkan UID
+            header("Location: login.php");
+            exit();
+        } catch (\Throwable $e) {
+            $pesan = "<div class='alert alert-danger mt-3'>Registrasi gagal: " . $e->getMessage() . "</div>";
+        }
     }
 }
 ?>
@@ -56,7 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <div class="mb-4">
                     <label for="register-password" class="form-label fw-semibold">Password</label>
-                    <input type="password" id="register-password" name="password" class="form-control" required minlength="6" placeholder="Minimal 6 karakter">
+                    <input type="password" id="register-password" name="password" class="form-control" required minlength="8" placeholder="Min. 8 karakter (Huruf besar, kecil, angka)">
+                    <div class="form-text text-muted" style="font-size: 0.8rem;">Minimal 8 karakter, mengandung huruf besar, huruf kecil, dan angka.</div>
                 </div>
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-success fw-bold">Register</button>
