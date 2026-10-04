@@ -39,6 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_id'] = $signInResult->firebaseUserId();
             $_SESSION['user_email'] = $email;
             
+            // Tambahkan penanda session khusus untuk memicu popup di index.php
+            $_SESSION['login_success'] = true; 
+            
             header("Location: index.php");
             exit();
         } else {

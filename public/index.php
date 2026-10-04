@@ -4,6 +4,15 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
+
+// Cek apakah user baru saja berhasil login
+$showPopup = false;
+if (isset($_SESSION['login_success'])) {
+    $showPopup = true;
+    // Hapus session ini agar popup tidak muncul lagi jika halaman di-refresh
+    unset($_SESSION['login_success']); 
+}
+$userEmail = $_SESSION['user_email'] ?? 'User';
 ?>
 
 <!DOCTYPE html>
@@ -15,8 +24,28 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    
+    <?php if ($showPopup): ?>
+    <!-- Elemen Popup Selamat Datang -->
+    <div id="welcomePopup" class="alert alert-success position-fixed top-0 start-50 translate-middle-x mt-4 shadow-lg text-center" style="z-index: 9999; min-width: 350px; border-radius: 10px; border: 2px solid #198754;">
+        🎉 Selamat datang, <strong><?= htmlspecialchars($userEmail) ?></strong>!
+    </div>
+
+    <!-- Script untuk menghapus popup dalam 5 detik -->
+    <script>
+        setTimeout(function() {
+            var popup = document.getElementById('welcomePopup');
+            if (popup) {
+                // Memberikan efek memudar sebelum hilang
+                popup.style.transition = "opacity 0.5s ease";
+                popup.style.opacity = "0";
+                setTimeout(() => popup.remove(), 500); 
+            }
+        }, 5000); // 5000 milidetik = 5 detik
+    </script>
+    <?php endif; ?>
+
     <div class="container py-5">
-        
         <!-- Tombol Logout diletakkan di sudut kanan atas -->
         <div class="d-flex justify-content-end">
             <a href="logout.php" class="btn btn-danger mb-3">Logout</a>
