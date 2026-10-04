@@ -14,20 +14,20 @@ $database = $factory->createDatabase();
 
 if (isset($_GET['email'])) {
     $email = $_GET['email'];
-    
+
     try {
-        // Ambil data user dari Auth
+        // Ambil status terbaru dari Firebase Authentication
         $user = $auth->getUserByEmail($email);
-        
+
         if ($user->emailVerified) {
-            // Update status is_verified menjadi true di Realtime Database
+            // Update status di Firebase Realtime Database menjadi true[cite: 6]
             $database->getReference('users/' . md5($email) . '/is_verified')->set(true);
-            
-            // Challenge: Auto Redirect ke halaman Login
+
+            // Challenge Dosen: Auto-redirect langsung ke halaman login dengan status sukses
             header("Location: login.php?status=verified");
             exit();
         } else {
-            echo "<h3>Email belum diverifikasi. Silakan klik link yang ada di email Anda.</h3>";
+            echo "<script>alert('Email belum diverifikasi. Silakan klik link di email Anda.'); window.location.href='login.php';</script>";
         }
     } catch (\Kreait\Firebase\Exception\AuthException $e) {
         echo "Error: " . $e->getMessage();
