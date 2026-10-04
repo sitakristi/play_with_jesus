@@ -8,7 +8,11 @@ if (!$firebaseCredentials) {
 }
 $serviceAccount = json_decode($firebaseCredentials, true);
 
-$factory = (new Factory)->withServiceAccount($serviceAccount);
+// Tambahkan URI Database
+$factory = (new Factory)
+    ->withServiceAccount($serviceAccount)
+    ->withDatabaseUri('https://tugas-afl2-playwithjesus-admin-default-rtdb.asia-southeast1.firebasedatabase.app/');
+    
 $auth = $factory->createAuth();
 $database = $factory->createDatabase();
 
@@ -16,14 +20,13 @@ if (isset($_GET['email'])) {
     $email = $_GET['email'];
 
     try {
-        // Ambil status terbaru dari Firebase Authentication
         $user = $auth->getUserByEmail($email);
 
         if ($user->emailVerified) {
-            // Update status di Firebase Realtime Database menjadi true[cite: 6]
+            // Update status di Firebase Realtime Database
             $database->getReference('users/' . md5($email) . '/is_verified')->set(true);
 
-            // Challenge Dosen: Auto-redirect langsung ke halaman login dengan status sukses
+            // Auto-redirect ke halaman login
             header("Location: login.php?status=verified");
             exit();
         } else {
